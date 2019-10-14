@@ -1,33 +1,10 @@
-.App {
-  text-align: center;
+.align-right {
+	float: right;
 }
-
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
+.clear {
+	overflow: auto;
 }
 
 .favorite {
-  background-color: #ddd;
-}
-
-img {
-  transition: transform .4s ease;
-}
-img:hover {
-  transform: scale(10);
+	background-color: #ddd;
 }

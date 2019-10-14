@@ -4,12 +4,12 @@ import Search from './Search';
 import Movies from './Movies';
 import Favorite from './Favorite';
 
-const API_KEY = 'aa422559';
-const getJSON = response => response.json();
+export const API_KEY = 'aa422559';
+export const getJSON = response => response.json();
 
 class App extends React.Component {
   state = {
-    search: '',
+    search: 'joker',
     movies: [],
     page: 'movies', // movies || favorites
     favorites: []
@@ -32,26 +32,17 @@ class App extends React.Component {
     .catch(e => console.error(e));
   };
 
-  toggleFavorite = imdbID => {
+  toggleFavorite = movie => {
     const {favorites} = this.state;
-    if (favorites.some(favorite => favorite.imdbID === imdbID)) {
+    if (favorites.some(favorite => favorite.imdbID === movie.imdbID)) {
       this.setState({
-        favorites: favorites.filter(movie => movie.imdbID !== imdbID)
+        favorites: favorites.filter(m => m.imdbID !== movie.imdbID)
       });
     } else {
-      this.fetchMovieAndAddToFavorites(imdbID);
-    }
-  }
-
-  fetchMovieAndAddToFavorites = imdbID => {
-    fetch(`http://www.omdbapi.com/?i=${imdbID}&apikey=${API_KEY}`)
-    .then(getJSON)
-    .then(movie => {
-      console.log('Movie added to favorite', movie);
       this.setState({
         favorites: [...this.state.favorites, movie]
-      });
-    })
+      })
+    }
   }
 
   render() {
@@ -69,6 +60,10 @@ class App extends React.Component {
         {page === 'favorites' && <Favorite favorites={favorites} toggleFavorite={this.toggleFavorite}/>}
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.fetchSearch();
   }
 
   componentDidUpdate(_, prevState) {

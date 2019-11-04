@@ -9,7 +9,7 @@ export const getJSON = response => response.json();
 
 class App extends React.Component {
   state = {
-    search: 'joker',
+    search: '',
     movies: [],
     page: 'movies', // movies || favorites
     favorites: []
